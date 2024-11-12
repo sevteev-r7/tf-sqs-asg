@@ -23,7 +23,7 @@ resource "aws_launch_template" "consumer_lt" {
 resource "aws_autoscaling_group" "consumer_asg" {
   availability_zones        = var.az_list
   name                      = var.asg_name
-  max_size                  = 10
+  max_size                  = 40
   min_size                  = 1
   health_check_grace_period = 300
   health_check_type         = "EC2"

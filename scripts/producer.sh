@@ -29,7 +29,8 @@ while [ $msgs_n -ne 0 ]; do
       }$([ $j -eq $batch_size ] && echo ']' || echo ',')
 EOT
   done
-  aws --region $region sqs send-message-batch --queue-url $queue_url --entries file://$batch_file > /dev/null 2>&1 && echo "Done" || { echo "Failed"; exit 1; }
+  aws --region $region sqs send-message-batch --queue-url $queue_url --entries file://$batch_file > /dev/null 2>&1
+  [ $? -eq 0 ] && echo "Done" || { echo "Failed"; exit 1; }
   rm -f $batch_file
   msgs_n=$(echo "$msgs_n - $batch_size" | bc)
 done
