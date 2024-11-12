@@ -9,5 +9,5 @@ Files
 Requirements
 ```
 export AWS_DEFAULT_REGION=<aws_region>
-export SQS_QUEUE_URL=<https://<sqs_queue_url>
+export SQS_QUEUE_URL=<sqs_queue_url>
 ```
