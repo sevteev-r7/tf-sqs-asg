@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export SQS_QUEUE_URL=https://sqs.eu-west-1.amazonaws.com/042293964381/tf_sqs_poc
-export AWS_DEFAULT_REGION=eu-west-1
+export SQS_QUEUE_URL=<sqs_queue_url>
+export AWS_DEFAULT_REGION=<url>
 
 while true; do
     delay=$((1 + $RANDOM % 10))
