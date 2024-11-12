@@ -3,8 +3,8 @@
 Proof of concept for SQS based EC2 autoscaling.
 
 Files
-*.tf - Terraform code for PoC infrastructure
-scripts/ - scripts to produce and consume SQS messages 
+- *.tf - Terraform code for PoC infrastructure
+- scripts/ - scripts to produce and consume SQS messages 
 
 Requirements
 ```
