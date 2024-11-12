@@ -1,6 +1,5 @@
 resource "aws_cloudwatch_dashboard" "tf-sqs-poc" {
-  dashboard_name = "tf-sqs-poc"
-
+  dashboard_name = var.cw_dashboard_name
   dashboard_body = jsonencode({
     "widgets": [
         {

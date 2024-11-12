@@ -32,3 +32,8 @@ variable "as_policy_name" {
   description = "AS policy name"
   default     = "tf_sqs_poc"
 }
+
+variable "cw_dashboard_name" {
+  description = "CloudWatch dashboard name"
+  default     = "tf_sqs_poc"
+}
