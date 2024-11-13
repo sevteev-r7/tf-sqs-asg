@@ -31,9 +31,9 @@ Traffic generation:
 ```
 ./mock-production.sh slow normal
 ```
-Options for 1st parameter (production speed, how fast send messages): slow|fast
+Options for 1st parameter (production speed, how fast send messages): slow | fast
 
-Options for 2nd parameter (production intence, how many messages to send every cycle): normal|intence|spiky
+Options for 2nd parameter (production intence, how many messages to send every cycle): normal | intence | spiky
 
 Traffic consumption:
 ```
