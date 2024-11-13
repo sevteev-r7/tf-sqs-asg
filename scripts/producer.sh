@@ -1,11 +1,13 @@
 #!/bin/bash
 # Questions? Ask @sevteev
 
-[ "$1" != "" ] && msgs_n=$1 || { echo "Missing number of messages to produce"; exit 1; }
+#simple check env vars and param before use
+[ -z "$AWS_DEFAULT_REGION" ] && { echo "Missing AWS_DEFAULT_REGION env var"; exit 1; }
+[ -z "$SQS_QUEUE_URL" ] && { echo "Missing SQS_QUEUE_URL env var"; exit 1; }
+[ -z "$1" ] && { echo "Missing number of messages to produce"; exit 1; }
 
-#set the env vars before use
-[ "$AWS_DEFAULT_REGION" != "" ] && region=$AWS_DEFAULT_REGION || { echo "Missing AWS_DEFAULT_REGION env var"; exit 1; }
-[ "$SQS_QUEUE_URL" != "" ] && queue_url=$SQS_QUEUE_URL || { echo "Missing SQS_QUEUE_URL env var"; exit 1; }
+msgs_n=$1
+queue_url=$SQS_QUEUE_URL
 
 export AWS_PAGER=""
 
@@ -29,8 +31,10 @@ while [ $msgs_n -ne 0 ]; do
       }$([ $j -eq $batch_size ] && echo ']' || echo ',')
 EOT
   done
-  aws --region $region sqs send-message-batch --queue-url $queue_url --entries file://$batch_file > /dev/null 2>&1
-  [ $? -eq 0 ] && echo "Done" || { echo "Failed"; exit 1; }
+  aws sqs send-message-batch --queue-url $queue_url --entries file://$batch_file > /dev/null 2>&1
+  ret_code=$?
   rm -f $batch_file
+  [ $ret_code -ne 0 ] && { echo "Failed"; exit 1; }
   msgs_n=$(echo "$msgs_n - $batch_size" | bc)
+  echo "Done"
 done
